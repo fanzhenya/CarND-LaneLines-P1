@@ -23,25 +23,30 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of 5 steps. 
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+1. make it gray
+2. apply a gaussian blur with 5x5 kernel
+3. detect canny edges
+4. cut out ROI
+5. detect hough lines
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function in 3 steps:
 
-![alt text][image1]
+1. filter out good left/right lane edges by looking at two vertices
+2. fit a line `np.polyfit()` on those vertices
+3. draw the fitted line.
+
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+One potential shortcoming would be the params will not work with other FOV cameras (even a same camera but a different mouting point).
 
-Another shortcoming could be ...
+Another shortcoming could be not able to hanle curvy road because I assume straight lane lines in above code.
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+A possible improvement would be use hough transform to detect circles for curvy roads.
